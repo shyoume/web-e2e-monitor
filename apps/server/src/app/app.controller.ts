@@ -1,13 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('/case')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('/info')
   getData() {
     return this.appService.getData();
+  }
+
+  @Post('/upsert')
+  setData(@Body() requestData) {
+    return this.appService.saveData(requestData);
   }
 }
